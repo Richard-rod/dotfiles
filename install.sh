@@ -54,7 +54,8 @@ PACMAN_PACKAGES=(
     networkmanager network-manager-applet
 
     # Utilities
-    fastfetch git unzip xclip libnotify gnome-keyring xdg-user-dirs
+    fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
+    firefox neovim
     xdg-desktop-portal-gtk dex
 
     # Fonts
