@@ -1,0 +1,1 @@
+/home/richard/.local/share/mybash/.bashrc
