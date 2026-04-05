@@ -55,7 +55,7 @@ PACMAN_PACKAGES=(
 
     # Utilities
     fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
-    firefox neovim
+    firefox neovim zoxide starship
     xdg-desktop-portal-gtk dex
 
     # Fonts
@@ -87,6 +87,11 @@ for dir in "${CONFIG_DIRS[@]}"; do
         success "Copied config/$dir → ~/.config/$dir"
     fi
 done
+
+if [[ -f "$DOTFILES_DIR/config/starship.toml" ]]; then
+    cp "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
+    success "Copied config/starship.toml → ~/.config/starship.toml"
+fi
 
 # ─────────────────────────────────────────────
 # 4. Copy home files → ~/
