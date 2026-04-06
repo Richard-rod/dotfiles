@@ -145,6 +145,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_q,                      spawn,          SHCMD("$HOME/.config/rofi/powermenu.sh")},
     { MODKEY|ControlMask|ShiftMask, XK_r,                      spawn,          SHCMD("systemctl reboot")},
     { MODKEY|ControlMask|ShiftMask, XK_s,                      spawn,          SHCMD("systemctl suspend")},
+    { MODKEY|ControlMask,           XK_l,                      spawn,          SHCMD("i3lock -c 2e3440")},
 };
 
 /* button definitions */

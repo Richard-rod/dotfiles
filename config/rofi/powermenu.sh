@@ -75,7 +75,7 @@ case "${chosen}" in
 		if [[ -x '/usr/bin/betterlockscreen' ]]; then
 			betterlockscreen -l
 		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
+			i3lock -i "$(ls "$HOME/dotfiles/wallpapers/"* 2>/dev/null | head -1)"
 		fi
         ;;
     "${suspend}")
