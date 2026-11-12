@@ -63,7 +63,7 @@ PACMAN_PACKAGES=(
 )
 
 AUR_PACKAGES=(
-    ttf-meslo-nerd
+    ttf-meslo-nerd acpilight
 )
 
 info "Installing pacman packages..."
@@ -141,7 +141,17 @@ info "Enabling NetworkManager..."
 sudo systemctl enable --now NetworkManager
 success "NetworkManager enabled"
 
+info "Adding $USER to the video group (needed for xbacklight)..."
+if id -nG "$USER" | tr ' ' '\n' | grep -qx video; then
+    success "$USER already in video group"
+else
+    sudo usermod -aG video "$USER"
+    success "Added $USER to video group"
+fi
+
 echo ""
 echo "────────────────────────────────────────"
-echo "  Install complete. Run 'startx' to launch dwm."
+echo "  Install complete. Reboot (or log out and back in), then run"
+echo "  'startx' to launch dwm."
+echo "  (Group changes and the acpilight udev rule only apply to new sessions.)"
 echo "────────────────────────────────────────"
