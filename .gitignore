@@ -1,0 +1,8 @@
+# Build output
+*.o
+/dwm/dwm
+/slstatus/slstatus
+
+# Patch leftovers
+*.orig
+*.rej
