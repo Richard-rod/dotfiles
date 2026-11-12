@@ -33,7 +33,6 @@ install: all
 	mkdir -p release
 	cp -f dwm release/
 	tar -czf release/dwm-${VERSION}.tar.gz -C release dwm
-	test -f /home/${SUDO_USER}/.xinitrc || install -Dm644 .xinitrc /home/${SUDO_USER}/.xinitrc
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm \
