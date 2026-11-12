@@ -6,3 +6,6 @@
 # Patch leftovers
 *.orig
 *.rej
+
+# Release artifacts
+/dwm/release/
