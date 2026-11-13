@@ -94,7 +94,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Edit this .bashrc file
-alias ebrc='vi ~/.bashrc'
+alias ebrc='vi ~/dotfiles/home/.bashrc'
 
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
@@ -195,14 +195,6 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 
 # SHA1
 alias sha1='openssl sha1'
-
-# alias to cleanup unused docker containers, images, networks, and volumes
-
-alias docker-clean=' \
-  docker container prune -f ; \
-  docker image prune -f ; \
-  docker network prune -f ; \
-  docker volume prune -f '
 
 #######################################################
 # SPECIAL FUNCTIONS
@@ -320,13 +312,8 @@ pwdtail() {
 alias whatismyip="whatsmyip"
 function whatsmyip () {
     # Internal IP Lookup.
-    if command -v ip &> /dev/null; then
-        echo -n "Internal IP: "
-        ip addr show wlan0 | grep "inet " | awk '{print $2}' | cut -d/ -f1
-    else
-        echo -n "Internal IP: "
-        ifconfig wlan0 | grep "inet " | awk '{print $2}'
-    fi
+    local_ip=$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{for(i=1;i<=NF;i++) if($i=="src"){print $(i+1); exit}}')
+    echo "Internal IP: ${local_ip:-none}"
 
     # External IP Lookup
     echo -n "External IP: "
@@ -343,6 +330,8 @@ trim() {
 
 #######################################################
 # Set the ultimate amazing command prompt
+# Also holds: PATH, zoxide/starship init, the Ctrl+f zi binding, and the
+# X autostart on tty1.
 #######################################################
 
 # Check if the shell is interactive
@@ -351,7 +340,7 @@ if [[ $- == *i* ]]; then
     bind '"\C-f":"zi\n"'
 fi
 
-export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
+export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin"
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
