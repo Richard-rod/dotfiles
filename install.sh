@@ -57,6 +57,7 @@ PACMAN_PACKAGES=(
     fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
     firefox neovim zoxide starship
     xdg-desktop-portal-gtk dex i3lock
+    trash-cli bat tree
 
     # Fonts
     noto-fonts-emoji
