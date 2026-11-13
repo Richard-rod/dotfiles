@@ -38,7 +38,6 @@ static const char *const autostart[] = {
     "dunst", NULL,
     "picom", "-b", NULL,
     "sh", "-c", "feh --bg-fill ~/dotfiles/wallpapers/*", NULL,
-    "/opt/Synergy/synergy-service", NULL,
     "slstatus", NULL,
     NULL /* terminate */
 };
@@ -52,13 +51,7 @@ static const int lcaselbl = 0;          /* 1 means make tag label lowercase */
 
 static const Rule rules[] = {
     /* class                instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-    { "St",                 NULL,     NULL,           0,         0,          1,          0,         0 },
-    { "kitty",              NULL,     NULL,           0,         0,          1,          0,         0 },
     { "alacritty",          NULL,     NULL,           0,         0,          1,          0,         0 },
-    { "warp-terminal",      NULL,     NULL,           0,         0,          1,          0,         0 },
-    { "terminator",         NULL,     NULL,           0,         0,          1,          0,         0 },
-    { "lutris",             NULL,     NULL,           0,         1,          0,          0,         0 },
-    { "steam_app_default",  NULL,     NULL,           0,         1,          0,          0,         0 },
     { "thunar",             NULL,     NULL,           0,         1,          0,          0,         0 },
     { NULL,                 NULL,     "Event Tester", 0,         0,          0,          1,        -1 }, /* xev */
 };
@@ -94,20 +87,19 @@ static const char *termcmd[]     = { "alacritty", NULL };
 static Key keys[] = {
     /* modifier                     key                        function        argument */
     { MODKEY,                       XK_r,                      spawn,          {.v = launchercmd} },
-    { MODKEY|ControlMask,           XK_r,                      spawn,          SHCMD ("protonrestart")},
     { MODKEY,                       XK_Return,                 spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,                      spawn,          SHCMD ("xdg-open https://")},
-    { MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p /media/drive/Screenshots/")},
-    { MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p /media/drive/Screenshots/")},
+    { MODKEY,                       XK_p,                      spawn,          SHCMD ("flameshot full -p $HOME/Pictures/Screenshots/")},
+    { MODKEY|ShiftMask,             XK_p,                      spawn,          SHCMD ("flameshot gui -p $HOME/Pictures/Screenshots/")},
     { MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
     { MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
-    { MODKEY,                       XK_w,                      spawn,          SHCMD ("looking-glass-client -F")},
-    { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Pictures/backgrounds/*")},
+    { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/dotfiles/wallpapers/*")},
     { 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD ("xbacklight -inc 5")},
     { 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD ("xbacklight -get | awk '{exit !($1 > 6)}' && xbacklight -dec 5 || xbacklight -set 1")},
     { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD ("amixer sset Master 5%- unmute")},
     { 0,                            XF86XK_AudioMute,          spawn,          SHCMD ("amixer sset Master $(amixer get Master | grep -q '\\[on\\]' && echo 'mute' || echo 'unmute')")},
     { 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD ("amixer sset Master 5%+ unmute")},
+    { 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD ("amixer sset Capture toggle")},
     { MODKEY|ShiftMask,             XK_b,                      togglebar,      {0} },
     { MODKEY,                       XK_j,                      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,                      focusstack,     {.i = -1 } },
