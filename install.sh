@@ -56,7 +56,7 @@ PACMAN_PACKAGES=(
     # Utilities
     fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
     firefox neovim zoxide starship
-    xdg-desktop-portal-gtk dex i3lock xss-lock
+    xdg-desktop-portal-gtk dex i3lock xss-lock mate-polkit
     trash-cli bat tree
 
     # Fonts
@@ -137,6 +137,10 @@ success "slstatus installed"
 info "Setting up XDG user directories..."
 xdg-user-dirs-update
 success "XDG directories created"
+
+info "Creating ~/Pictures/Screenshots..."
+mkdir -p "$HOME/Pictures/Screenshots"
+success "Screenshots directory ready"
 
 info "Enabling NetworkManager..."
 sudo systemctl enable --now NetworkManager
