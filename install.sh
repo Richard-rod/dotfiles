@@ -58,6 +58,7 @@ PACMAN_PACKAGES=(
     firefox neovim zoxide starship
     xdg-desktop-portal-gtk dex i3lock xss-lock mate-polkit
     trash-cli bat tree
+    bash-completion fzf
 
     # Fonts
     noto-fonts-emoji
