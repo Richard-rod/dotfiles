@@ -36,28 +36,11 @@ run_cmd() {
 			systemctl reboot
 			;;
 		--suspend)
-			mpc -q pause
 			amixer set Master mute
 			systemctl suspend
 			;;
 		--logout)
-			case "$DESKTOP_SESSION" in
-				openbox)
-					openbox --exit
-					;;
-				bspwm)
-					bspc quit
-					;;
-				dwm)
-					pkill dwm
-					;;
-				i3)
-					i3-msg exit
-					;;
-				plasma)
-					qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-					;;
-			esac
+			pkill dwm
 			;;
 	esac
 }
@@ -72,9 +55,7 @@ case "${chosen}" in
 		run_cmd --reboot
         ;;
     "${lock}")
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
+		if [[ -x '/usr/bin/i3lock' ]]; then
 			i3lock -i "$(ls "$HOME/dotfiles/wallpapers/"*.png 2>/dev/null | head -1)"
 		fi
         ;;
