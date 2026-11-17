@@ -56,7 +56,7 @@ PACMAN_PACKAGES=(
     # Utilities
     fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
     firefox neovim zoxide starship
-    xdg-desktop-portal-gtk dex i3lock xss-lock mate-polkit
+    xdg-desktop-portal-gtk dex xss-lock mate-polkit
     trash-cli bat tree
     bash-completion fzf
 
@@ -65,7 +65,7 @@ PACMAN_PACKAGES=(
 )
 
 AUR_PACKAGES=(
-    ttf-meslo-nerd acpilight
+    ttf-meslo-nerd acpilight i3lock-color
 )
 
 info "Installing pacman packages..."

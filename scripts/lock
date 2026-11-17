@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# The one lock command used by the dwm key, xss-lock and the power menu.
+
+# Already locked? Do nothing, so a second trigger doesn't fail.
+pgrep -x i3lock >/dev/null && exit 0
+
+img="$HOME/dotfiles/wallpapers/Shunsui Kyoraku.png"
+
+# Fall back to a plain color if the image is missing, so a lock never fails.
+if [ -f "$img" ]; then
+    bg=(-F -i "$img")
+else
+    bg=(-c 2e3440)
+fi
+
+exec i3lock -n --composite "${bg[@]}" \
+    --bar-indicator --bar-direction=1 --bar-base-width=20 --bar-pos="h-20" --clock

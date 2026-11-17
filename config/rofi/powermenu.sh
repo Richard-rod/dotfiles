@@ -55,9 +55,7 @@ case "${chosen}" in
 		run_cmd --reboot
         ;;
     "${lock}")
-		if [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock -i "$(ls "$HOME/dotfiles/wallpapers/"*.png 2>/dev/null | head -1)"
-		fi
+		"$HOME/dotfiles/scripts/lock"
         ;;
     "${suspend}")
 		run_cmd --suspend
