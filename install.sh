@@ -72,7 +72,7 @@ PACMAN_PACKAGES=(
     networkmanager network-manager-applet
 
     # Utilities
-    fastfetch unzip xclip libnotify gnome-keyring xdg-user-dirs
+    fastfetch unzip strace unrar 7zip xarchiver xclip libnotify gnome-keyring xdg-user-dirs
     firefox neovim zoxide starship
     xdg-desktop-portal-gtk dex xss-lock mate-polkit
     trash-cli bat tree
@@ -83,7 +83,7 @@ PACMAN_PACKAGES=(
 )
 
 AUR_PACKAGES=(
-    ttf-meslo-nerd acpilight i3lock-color
+    ttf-meslo-nerd acpilight i3lock-color github-desktop-bin
 )
 
 info "Installing pacman packages..."
