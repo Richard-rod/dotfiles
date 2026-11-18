@@ -13,12 +13,30 @@ error()   { echo "[ERROR] $*" >&2; exit 1; }
 
 [[ "$EUID" -eq 0 ]] && error "Do not run this script as root. sudo will be used where needed."
 
+if [[ "$DOTFILES_DIR" != "$HOME/dotfiles" ]]; then
+    error "Repo is at $DOTFILES_DIR but must be at ~/dotfiles. The wallpaper, lock script and power menu expect the repo at ~/dotfiles."
+fi
+
+# Keep sudo credentials alive for the whole run
+sudo -v
+while kill -0 "$$" 2>/dev/null; do sudo -n true; sleep 50; done &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
+
+# ─────────────────────────────────────────────
+# 0. System update
+# ─────────────────────────────────────────────
+info "Updating system..."
+sudo pacman -Syu --noconfirm
+success "System updated"
+
 # ─────────────────────────────────────────────
 # 1. Install yay (AUR helper)
 # ─────────────────────────────────────────────
 if ! command -v yay &>/dev/null; then
     info "Installing yay..."
     sudo pacman -S --needed --noconfirm git base-devel
+    rm -rf /tmp/yay
     git clone https://aur.archlinux.org/yay.git /tmp/yay
     (cd /tmp/yay && makepkg -si --noconfirm)
     rm -rf /tmp/yay
@@ -36,7 +54,7 @@ PACMAN_PACKAGES=(
 
     # Xorg
     xorg-server xorg-xinit xorg-xrandr xorg-xsetroot xorg-xset xorg-xprop
-    xf86-input-libinput
+    xf86-input-libinput mesa
 
     # Window manager extras
     picom rofi dunst feh flameshot
@@ -157,7 +175,7 @@ fi
 
 echo ""
 echo "────────────────────────────────────────"
-echo "  Install complete. Reboot (or log out and back in), then run"
-echo "  'startx' to launch dwm."
+echo "  Install complete. Reboot, then log in on tty1 and dwm starts"
+echo "  automatically."
 echo "  (Group changes and the acpilight udev rule only apply to new sessions.)"
 echo "────────────────────────────────────────"
