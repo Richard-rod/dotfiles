@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Combined battery info for slstatus: "battery pct" or "battery state".
+now=0
+full=0
+state="o"
+for b in /sys/class/power_supply/BAT*; do
+    [ -d "$b" ] || continue
+    if [ -r "$b/energy_now" ] && [ -r "$b/energy_full" ]; then
+        n=$(<"$b/energy_now")
+        f=$(<"$b/energy_full")
+    elif [ -r "$b/charge_now" ] && [ -r "$b/charge_full" ]; then
+        n=$(<"$b/charge_now")
+        f=$(<"$b/charge_full")
+    else
+        continue
+    fi
+    now=$((now + n))
+    full=$((full + f))
+    case "$(<"$b/status")" in
+        Charging) state="+" ;;
+        Discharging) [ "$state" = "+" ] || state="-" ;;
+    esac
+done
+if [ "$full" -le 0 ]; then
+    echo "n/a"
+    exit 0
+fi
+case "$1" in
+    state) echo "$state" ;;
+    *) echo $((100 * now / full)) ;;
+esac

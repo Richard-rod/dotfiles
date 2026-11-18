@@ -68,7 +68,7 @@ static const struct arg args[] = {
 	/*{ cpu_perc,           "  %s%%",       NULL },*/
 	/*{ ram_used,             "  %s",         NULL },*/	
 	/*{ ram_total,            "/%s",           NULL },*/	
-	{ battery_state,        " %s",           "BAT0" },
-	{ battery_perc,         " 󰁹 %s%%",       "BAT0" },
-	{ datetime,             "| %s",         "%a, %b %d %k:%M" },
+	{ run_command,        " %s",           "$HOME/dotfiles/scripts/battery state" },
+	{ run_command,         " 󰁹 %s%%",       "$HOME/dotfiles/scripts/battery pct" },
+	{ datetime,             " | %s",         "%a, %b %d %k:%M" },
 };
