@@ -207,7 +207,7 @@ extract() {
 			*.tar.bz2) tar xvjf $archive ;;
 			*.tar.gz) tar xvzf $archive ;;
 			*.bz2) bunzip2 $archive ;;
-			*.rar) rar x $archive ;;
+			*.rar) unrar x $archive ;;
 			*.gz) gunzip $archive ;;
 			*.tar) tar xvf $archive ;;
 			*.tbz2) tar xvjf $archive ;;
@@ -237,7 +237,6 @@ ftext() {
 
 # Copy file with a progress bar
 cpp() {
-    set -e
     strace -q -ewrite cp -- "${1}" "${2}" 2>&1 |
     awk '{
         count += $NF
