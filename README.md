@@ -37,12 +37,10 @@ The repo must live at exactly `~/dotfiles`: the lock script, wallpaper and power
 that path, and `install.sh` refuses to run anywhere else.
 
 ```sh
-git clone -b Clean-upv1 https://github.com/Richard-rod/dotfiles.git ~/dotfiles
+git clone https://github.com/Richard-rod/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
-
-(Drop `-b Clean-upv1` once that branch is merged into `main`.)
 
 Do not run it as root. It asks for your sudo password once, the AUR builds take a few
 minutes, and it is safe to re-run.
