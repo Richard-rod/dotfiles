@@ -111,6 +111,9 @@ that no longer exists. From the live ISO:
   crashes in the kernel log (nouveau), press `e` at the GRUB menu, add
   `module_blacklist=nouveau` to the end of the line starting with `linux`, press
   `Ctrl+X`, log in, and run `install.sh`, which makes the setting permanent.
+- **Shutdown watchdog message:** the installer disables the Intel hardware watchdog
+  modules to silence the "watchdog did not stop" message at shutdown. To undo, delete
+  `/etc/modprobe.d/blacklist-watchdog.conf` and run `sudo mkinitcpio -P`.
 - **nouveau blacklist:** the installer blacklists nouveau on this machine because it
   crashed at boot on kernel 6.18.64 at the time of writing. To retest later, press `e` at
   the GRUB menu, delete the parameter, and boot.

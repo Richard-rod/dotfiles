@@ -137,6 +137,24 @@ sudo cp "$DOTFILES_DIR/xorg/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.c
 success "Copied xorg/30-touchpad.conf → /etc/X11/xorg.conf.d/"
 
 # ─────────────────────────────────────────────
+# 5b. Blacklist Intel hardware watchdog modules
+# ─────────────────────────────────────────────
+# Silences the "watchdog did not stop" message at shutdown. The boot image
+# includes modprobe settings, so it is rebuilt when the file changes.
+WDT_SRC="$DOTFILES_DIR/system/modprobe.d/blacklist-watchdog.conf"
+WDT_DST="/etc/modprobe.d/blacklist-watchdog.conf"
+
+if ! cmp -s "$WDT_SRC" "$WDT_DST"; then
+    info "Installing watchdog blacklist..."
+    sudo cp "$WDT_SRC" "$WDT_DST"
+    info "Rebuilding initramfs (mkinitcpio -P)..."
+    sudo mkinitcpio -P
+    success "Watchdog modules blacklisted"
+else
+    info "Watchdog blacklist already in place, skipping mkinitcpio"
+fi
+
+# ─────────────────────────────────────────────
 # 6. Compile and install dwm
 # ─────────────────────────────────────────────
 info "Compiling dwm..."
