@@ -165,6 +165,14 @@ info "Enabling NetworkManager..."
 sudo systemctl enable --now NetworkManager
 success "NetworkManager enabled"
 
+info "Enabling periodic TRIM (fstrim.timer)..."
+if systemctl is-enabled --quiet fstrim.timer; then
+    success "fstrim.timer already enabled"
+else
+    sudo systemctl enable --now fstrim.timer
+    success "fstrim.timer enabled"
+fi
+
 info "Adding $USER to the video group (needed for xbacklight)..."
 if id -nG "$USER" | tr ' ' '\n' | grep -qx video; then
     success "$USER already in video group"
