@@ -82,6 +82,22 @@ Re-running `./install.sh` also redoes all the copies and rebuilds.
   `/mnt` and the EFI partition on `/mnt/boot`, then run `arch-chroot /mnt` and fix things
   (for example `passwd <user>`).
 
+### Install drops back to the boot menu
+
+If choosing Arch from the firmware boot menu returns to the menu after a few seconds on
+a reinstall, a leftover firmware entry from a previous install may point at a partition
+that no longer exists. From the live ISO:
+
+1. Run `efibootmgr`, find the stale entry, and delete it with `efibootmgr -B -b <number>`.
+2. Find the partitions with `lsblk -f`, then mount the root partition on `/mnt` and the
+   EFI partition on `/mnt/boot`.
+3. Run `arch-chroot /mnt`, then:
+   - `grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --recheck`
+   - the same command with `--removable` instead of `--bootloader-id=Arch` (this adds a
+     fallback copy)
+   - `grub-mkconfig -o /boot/grub/grub.cfg`
+4. Run `exit`, then `umount -R /mnt` and reboot.
+
 ## T480 notes
 
 - **Fn Lock:** the Fn Lock state decides whether the top-row keys act as
