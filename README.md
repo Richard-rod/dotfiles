@@ -15,7 +15,8 @@ Keybindings: [docs/keybindings.md](docs/keybindings.md)
 2. Run `curl -fsSL https://christitus.com/linux | sh`
    (add `--size-bypass` if your terminal is too small for the menu).
 3. Choose **System Setup > Arch Linux > Arch Server Setup**.
-4. Follow the prompts on screen.
+4. Follow the prompts on screen. On this machine, choose **nouveau** at the NVIDIA
+   prompt: the packaged NVIDIA driver no longer supports this GPU (Pascal).
 5. Reboot when it finishes and remove the USB stick.
 
 > **Warning:** the disk list can include the USB stick, and choosing a disk erases it
@@ -90,6 +91,13 @@ Re-running `./install.sh` also redoes all the copies and rebuilds.
   `Super+Ctrl+Shift+S` or the power menu.
 - **Brightness:** needs `acpilight` and membership in the `video` group. `install.sh`
   handles both, but log out and back in (or reboot) for the group to apply.
+- **First boot hangs (nouveau):** if the first boot after the base install hangs or
+  crashes in the kernel log (nouveau), press `e` at the GRUB menu, add
+  `module_blacklist=nouveau` to the end of the line starting with `linux`, press
+  `Ctrl+X`, log in, and run `install.sh`, which makes the setting permanent.
+- **nouveau blacklist:** the installer blacklists nouveau on this machine because it
+  crashed at boot on kernel 6.18.64 at the time of writing. To retest later, press `e` at
+  the GRUB menu, delete the parameter, and boot.
 
 ## Credits
 
