@@ -4,7 +4,7 @@ Everything here comes from `dwm/config.h`. **Super** is the Windows key.
 
 ## dwm basics
 
-- **Tags:** dwm has 5 tags (workspaces), shown in the bar and bound to `Super+1` to `Super+5`.
+- **Tags:** dwm has 4 tags (workspaces), shown in the bar and bound to `Super+1` to `Super+4`.
   A window can sit on one or more tags, and you can view several tags at once.
 - **Master and stack:** in the tiling layout one window (the master) takes the left side
   (60% of the width), and the rest stack on the right. One master window by default.
@@ -77,10 +77,10 @@ selected right now.
 
 | Keys | What it does |
 |---|---|
-| `Super+1` to `Super+5` | Go to that tag |
-| `Super+Shift+1` to `5` | Move the window to that tag |
-| `Super+Ctrl+1` to `5` | Also show that tag alongside the current one |
-| `Super+Ctrl+Shift+1` to `5` | Also put the window on that tag |
+| `Super+1` to `Super+4` | Go to that tag |
+| `Super+Shift+1` to `4` | Move the window to that tag |
+| `Super+Ctrl+1` to `4` | Also show that tag alongside the current one |
+| `Super+Ctrl+Shift+1` to `4` | Also put the window on that tag |
 | `Super+0` | Show all tags at once |
 | `Super+Tab` | Go back to the previous tag |
 

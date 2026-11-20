@@ -41,7 +41,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "󰊖", "", "" };
+static const char *tags[] = { "", "", "", "" };
 
 static const char ptagf[] = "[%s %s]";  /* format of a tag label */
 static const char etagf[] = "[%s]";     /* format of an empty tag */
@@ -51,6 +51,7 @@ static const Rule rules[] = {
     /* class                instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
     { "alacritty",          NULL,     NULL,           0,         0,          1,          0,         0 },
     { "thunar",             NULL,     NULL,           0,         1,          0,          0,         0 },
+    { "GitHub Desktop",     NULL,     NULL,           1 << 3,    0,          0,          0,        -1 },
     { NULL,                 NULL,     "Event Tester", 0,         0,          0,          1,        -1 }, /* xev */
 };
 
@@ -129,7 +130,6 @@ static Key keys[] = {
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
     TAGKEYS(                        XK_4,                      3)
-    TAGKEYS(                        XK_5,                      4)
     { MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
     { MODKEY|ControlMask,           XK_q,                      spawn,          SHCMD("$HOME/.config/rofi/powermenu.sh")},
     { MODKEY|ControlMask|ShiftMask, XK_r,                      spawn,          SHCMD("systemctl reboot")},
