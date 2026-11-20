@@ -4,14 +4,52 @@
 # Already locked? Do nothing, so a second trigger doesn't fail.
 pgrep -x i3lock >/dev/null && exit 0
 
-img="$HOME/dotfiles/wallpapers/Shunsui Kyoraku.png"
+dir="$HOME/Pictures/lockscreens"
+img=$(find "$dir" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) 2>/dev/null | shuf -n 1)
+font="MesloLGM Nerd Font Mono"
 
 # Fall back to a plain color if the image is missing, so a lock never fails.
-if [ -f "$img" ]; then
+if [ -n "$img" ] && [ -f "$img" ]; then
     bg=(-F -i "$img")
 else
     bg=(-c 2e3440)
 fi
 
-exec i3lock -n --composite "${bg[@]}" \
-    --bar-indicator --bar-direction=1 --bar-base-width=20 --bar-pos="h-20" --clock
+bar_opts=(
+    --bar-indicator
+    --bar-direction=1
+    --bar-base-width=20
+    --bar-max-height 20
+    --bar-step 20
+    --bar-periodic-step 20
+    --bar-pos=h
+    --keyhl-color=a6da95
+    --bshl-color=8aadf4
+    --ringwrong-color=ed8796
+    --ringver-color=eed49f
+)
+
+time_opts=(
+    --clock
+    --time-font="$font"
+    --time-str="%I:%M%P"
+    --time-color cad3f5
+    --timeoutline-color 181926
+    --timeoutline-width 1
+    --time-size 100
+    --time-pos="ix:h-250"
+)
+
+date_opts=(
+    --date-font="$font"
+    --date-str="%a, %b %d"
+    --date-color b8c0e0
+    --dateoutline-color 181926
+    --dateoutline-width 1
+    --date-size 50
+    --date-pos="tx:ty+60"
+)
+
+exec i3lock -n --composite "${bg[@]}" "${bar_opts[@]}" "${time_opts[@]}" "${date_opts[@]}"
+
+
