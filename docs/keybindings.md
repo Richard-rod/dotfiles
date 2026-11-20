@@ -20,7 +20,7 @@ Everything here comes from `dwm/config.h`. **Super** is the Windows key.
 | `Super+Enter` | Terminal (alacritty) |
 | `Super+B` | Open the default web browser (`xdg-open https://`) |
 | `Super+E` | File manager (Thunar) |
-| `Super+Shift+W` | Set a random wallpaper from `~/dotfiles/wallpapers` |
+| `Super+Shift+W` | Set a random wallpaper from `~/Pictures/wallpapers` |
 
 ## Screenshots
 

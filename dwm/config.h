@@ -35,7 +35,7 @@ static const char *const autostart[] = {
     "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
     "flameshot", NULL,
     "dunst", NULL,
-    "sh", "-c", "feh --bg-fill ~/dotfiles/wallpapers/*", NULL,
+    "sh", "-c", "feh --randomize --bg-fill ~/Pictures/wallpapers/*", NULL,
     "slstatus", NULL,
     NULL /* terminate */
 };
@@ -92,7 +92,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_p,                      spawn,          SHCMD ("flameshot gui --clipboard")},
     { 0,                            XK_Print,                  spawn,          SHCMD ("flameshot gui --clipboard")},
     { MODKEY,                       XK_e,                      spawn,          SHCMD ("thunar")},
-    { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/dotfiles/wallpapers/*")},
+    { MODKEY|ShiftMask,             XK_w,                      spawn,          SHCMD ("feh --randomize --bg-fill ~/Pictures/wallpapers/*")},
     { 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD ("xbacklight -inc 5")},
     { 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD ("xbacklight -get | awk '{exit !($1 > 6)}' && xbacklight -dec 5 || xbacklight -set 1")},
     { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD ("amixer sset Master 5%- unmute")},

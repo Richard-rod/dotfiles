@@ -175,9 +175,11 @@ info "Setting up XDG user directories..."
 xdg-user-dirs-update
 success "XDG directories created"
 
-info "Creating ~/Pictures/Screenshots..."
+info "Creating ~/Pictures/{Screenshots,wallpapers,lockscreens}..."
 mkdir -p "$HOME/Pictures/Screenshots"
-success "Screenshots directory ready"
+mkdir -p "$HOME/Pictures/wallpapers"
+mkdir -p "$HOME/Pictures/lockscreens"
+success "Screenshots, wallpapers and lockscreens directories ready"
 
 info "Enabling NetworkManager..."
 sudo systemctl enable --now NetworkManager

@@ -33,7 +33,7 @@ Log in on the text console. If there is no network, run `nmtui`.
 
 ### 3. Clone and install
 
-The repo must live at exactly `~/dotfiles`: the lock script, wallpaper and power menu use
+The repo must live at exactly `~/dotfiles`: the lock script and power menu use
 that path, and `install.sh` refuses to run anywhere else.
 
 ```sh
