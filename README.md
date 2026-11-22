@@ -57,6 +57,7 @@ Reboot, then log in on tty1. dwm starts automatically from `.bashrc`.
 - **Screenshot:** `Print` opens the Flameshot selector and copies to the clipboard.
 - **Wi-Fi:** the nm-applet icon appears in the tray; connect from it.
 - **GitHub Desktop:** the first launch asks you to set up a keyring password.
+- **Low battery:** warnings come from batsignal and the shutdown from `scripts/battery-shutdown`.
 
 ## After editing
 

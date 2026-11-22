@@ -75,7 +75,7 @@ PACMAN_PACKAGES=(
     fastfetch unzip strace unrar 7zip xarchiver xclip libnotify gnome-keyring xdg-user-dirs
     firefox neovim zoxide starship
     xdg-desktop-portal-gtk dex xss-lock mate-polkit
-    trash-cli bat tree
+    trash-cli bat tree batsignal
     bash-completion fzf
 
     # Fonts
@@ -99,7 +99,7 @@ success "AUR packages installed"
 # ─────────────────────────────────────────────
 info "Copying config files..."
 
-CONFIG_DIRS=(alacritty rofi flameshot fastfetch)
+CONFIG_DIRS=(alacritty rofi flameshot fastfetch dunst)
 for dir in "${CONFIG_DIRS[@]}"; do
     if [[ -d "$DOTFILES_DIR/config/$dir" ]]; then
         mkdir -p "$HOME/.config/$dir"

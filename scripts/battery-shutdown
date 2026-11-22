@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Final low-battery shutdown with a cancel window. Called by batsignal (-D).
+# Env: BATTERY_SHUTDOWN_GRACE (seconds, default 60), BATTERY_SHUTDOWN_DRYRUN=1.
+set -u
+
+battery="$HOME/dotfiles/scripts/battery"
+tag="x-dunst-stack-tag:battery-shutdown"
+grace="${BATTERY_SHUTDOWN_GRACE:-60}"
+step=5
+
+# Only one copy at a time; batsignal may call this more than once.
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/battery-shutdown.lock"
+flock -n 9 || exit 0
+
+pct="$("$battery" pct)"
+notify-send -u critical -h "string:$tag" \
+    "Battery critical: ${pct}%" \
+    "Powering off in ${grace} seconds unless you plug in." || true
+
+elapsed=0
+while [ "$elapsed" -lt "$grace" ]; do
+    sleep "$step"
+    elapsed=$((elapsed + step))
+    if [ "$("$battery" state)" != "-" ]; then
+        notify-send -u low -h "string:$tag" \
+            "Power restored, shutdown cancelled" || true
+        exit 0
+    fi
+done
+
+if [ "$("$battery" state)" = "-" ]; then
+    if [ "${BATTERY_SHUTDOWN_DRYRUN:-0}" = "1" ]; then
+        echo "would power off"
+    else
+        systemctl poweroff
+    fi
+fi
