@@ -113,6 +113,9 @@ that no longer exists. From the live ISO:
 - **Shutdown watchdog message:** the installer disables the Intel hardware watchdog
   modules to silence the "watchdog did not stop" message at shutdown. To undo, delete
   `/etc/modprobe.d/blacklist-watchdog.conf` and run `sudo mkinitcpio -P`.
+- **Charging symbol refresh:** the charging symbol in the bar refreshes through a udev
+  rule on the AC device (`system/udev/90-slstatus-refresh.rules`). To undo, delete
+  `/etc/udev/rules.d/90-slstatus-refresh.rules` and run `sudo udevadm control --reload`.
 - **nouveau blacklist:** the installer blacklists nouveau on this machine because it
   crashed at boot on kernel 6.18.64 at the time of writing. To retest later, press `e` at
   the GRUB menu, delete the parameter, and boot.

@@ -155,6 +155,23 @@ else
 fi
 
 # ─────────────────────────────────────────────
+# 5c. Refresh slstatus when the charger is plugged or unplugged
+# ─────────────────────────────────────────────
+# udev rule on the AC device that sends SIGUSR1 to slstatus, so the charging
+# symbol in the bar updates immediately.
+UDEV_SRC="$DOTFILES_DIR/system/udev/90-slstatus-refresh.rules"
+UDEV_DST="/etc/udev/rules.d/90-slstatus-refresh.rules"
+
+if ! cmp -s "$UDEV_SRC" "$UDEV_DST"; then
+    info "Installing slstatus refresh udev rule..."
+    sudo cp "$UDEV_SRC" "$UDEV_DST"
+    sudo udevadm control --reload
+    success "slstatus refresh udev rule installed"
+else
+    info "slstatus refresh udev rule already in place, skipping reload"
+fi
+
+# ─────────────────────────────────────────────
 # 6. Compile and install dwm
 # ─────────────────────────────────────────────
 info "Compiling dwm..."

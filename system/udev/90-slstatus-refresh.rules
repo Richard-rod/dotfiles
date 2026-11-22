@@ -1,0 +1,2 @@
+# Refresh the slstatus bar when the charger is plugged or unplugged (AC device change -> SIGUSR1)
+SUBSYSTEM=="power_supply", KERNEL=="AC", ACTION=="change", RUN+="/usr/bin/systemd-run --on-active=3 /usr/bin/pkill -USR1 -x slstatus"
