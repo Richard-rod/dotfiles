@@ -43,9 +43,10 @@ time_opts=(
 date_opts=(
     --date-font="$font"
     --date-str="%a, %b %d"
-    --date-color b8c0e0
+#    --date-color b8c0e0
+    --date-color cad3f5
     --dateoutline-color 181926
-    --dateoutline-width 1
+    --dateoutline-width 2
     --date-size 50
     --date-pos="tx:ty+60"
 )
