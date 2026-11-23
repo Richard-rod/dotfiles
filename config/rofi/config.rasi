@@ -8,4 +8,4 @@ configuration {
   display-combi: "  ";
   font: "MesloLGM Nerd Font Mono 14";
 }
-@theme "themes/sidetab-nord.rasi"
+@theme "themes/sidetab-catppuccin.rasi"
