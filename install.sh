@@ -251,6 +251,16 @@ if grep -qs "T480" /sys/class/dmi/id/product_version && grep -qs '0x10de' /sys/b
     grep '^GRUB_CMDLINE_LINUX_DEFAULT=' "$GRUB_DEFAULT_FILE" | grep -qE "$NOUVEAU_RE" \
         || error "module_blacklist=nouveau is missing from $GRUB_DEFAULT_FILE after editing."
     success "nouveau blacklisted"
+    NVPM_SRC="$DOTFILES_DIR/system/udev/90-nvidia-runtime-pm.rules"
+    NVPM_DST="/etc/udev/rules.d/90-nvidia-runtime-pm.rules"
+    if ! cmp -s "$NVPM_SRC" "$NVPM_DST"; then
+        info "Installing NVIDIA runtime power management rule..."
+        sudo cp "$NVPM_SRC" "$NVPM_DST"
+        sudo udevadm control --reload
+        success "NVIDIA runtime power management rule installed (applies after reboot)"
+    else
+        info "NVIDIA runtime power management rule already in place, skipping"
+    fi
 else
     info "Not a T480 with an NVIDIA GPU, skipping machine-specific fixes"
 fi

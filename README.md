@@ -119,6 +119,9 @@ that no longer exists. From the live ISO:
 - **nouveau blacklist:** the installer blacklists nouveau on this machine because it
   crashed at boot on kernel 6.18.64 at the time of writing. To retest later, press `e` at
   the GRUB menu, delete the parameter, and boot.
+- **NVIDIA GPU Power:** the NVIDIA GPU is allowed to runtime-suspend through a udev rule
+   because nouveau is blacklisted and nothing else powers the chip down; to undo, delete
+   /etc/udev/rules.d/90-nvidia-runtime-pm.rules and reboot.
 
 ## Credits
 
