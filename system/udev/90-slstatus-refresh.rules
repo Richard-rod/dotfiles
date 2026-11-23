@@ -1,2 +1,4 @@
-# Refresh the slstatus bar when the charger is plugged or unplugged (AC device change -> SIGUSR1)
-SUBSYSTEM=="power_supply", KERNEL=="AC", ACTION=="change", RUN+="/usr/bin/systemd-run --on-active=3 /usr/bin/pkill -USR1 -x slstatus"
+# Refresh the slstatus bar when the charger is plugged or unplugged.
+# Delayed 3 s so the battery status has time to update; AccuracySec=100ms
+# stops systemd from coalescing the timer (its default window is 1 minute).
+SUBSYSTEM=="power_supply", KERNEL=="AC", ACTION=="change", RUN+="/usr/bin/systemd-run --on-active=3 --timer-property=AccuracySec=100ms /usr/bin/pkill -USR1 -x slstatus"
