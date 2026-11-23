@@ -2,6 +2,7 @@
 
 ## Author : Aditya Shakya (adi1090x)
 ## Github : @adi1090x
+## Modified by Richard (Richard-rod), 2026. Licensed under GPL-3.0, see licenses/GPL-3.0-adi1090x-rofi.txt
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"

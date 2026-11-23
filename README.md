@@ -1,6 +1,6 @@
 # dotfiles
 
-Arch Linux + [dwm](https://dwm.suckless.org/) setup for a ThinkPad T480, forked from
+Arch Linux + [dwm](https://dwm.suckless.org/) setup for a ThinkPad T480, based on
 [ChrisTitusTech/dwm-titus](https://github.com/ChrisTitusTech/dwm-titus). This repo holds
 the dwm and slstatus source, the config files, and an `install.sh` that sets up everything
 on top of a fresh Arch install.
@@ -129,6 +129,10 @@ that no longer exists. From the live ISO:
 
 ## Credits
 
-[ChrisTitusTech/dwm-titus](https://github.com/ChrisTitusTech/dwm-titus) ·
-[suckless dwm](https://dwm.suckless.org/) and [slstatus](https://tools.suckless.org/slstatus/) ·
-[ChrisTitusTech/linutil](https://github.com/ChrisTitusTech/linutil)
+- [suckless dwm](https://dwm.suckless.org/) and [slstatus](https://tools.suckless.org/slstatus/): licenses in `dwm/LICENSE` and `slstatus/LICENSE`. Base configuration from [ChrisTitusTech/dwm-titus](https://github.com/ChrisTitusTech/dwm-titus) (MIT).
+- `home/.bashrc`, the starship configs and the fastfetch config: adapted from [ChrisTitusTech/mybash](https://github.com/ChrisTitusTech/mybash) (MIT).
+- `config/rofi/powermenu.sh` and `config/rofi/themes/powermenu.rasi`: from [adi1090x/rofi](https://github.com/adi1090x/rofi) (GPL-3.0), modified.
+- Catppuccin Macchiato palettes for rofi, dunst and alacritty: [catppuccin](https://github.com/catppuccin) (MIT).
+- [ChrisTitusTech/linutil](https://github.com/ChrisTitusTech/linutil): used for the base install, not included.
+
+License texts: THIRD-PARTY-NOTICES.md and licenses/.
