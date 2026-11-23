@@ -110,6 +110,10 @@ that no longer exists. From the live ISO:
   crashes in the kernel log (nouveau), press `e` at the GRUB menu, add
   `module_blacklist=nouveau` to the end of the line starting with `linux`, press
   `Ctrl+X`, log in, and run `install.sh`, which makes the setting permanent.
+- **TLP:** holds both batteries at 75-80 percent and keeps the idle GPU suspended on AC.
+  `sudo tlp fullcharge` charges to 100 percent once. To remove the thresholds, delete
+  those lines from `/etc/tlp.d/10-t480.conf` and run `sudo tlp fullcharge`, because the
+  thresholds are stored in the battery firmware.
 - **Shutdown watchdog message:** the installer disables the Intel hardware watchdog
   modules to silence the "watchdog did not stop" message at shutdown. To undo, delete
   `/etc/modprobe.d/blacklist-watchdog.conf` and run `sudo mkinitcpio -P`.

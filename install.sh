@@ -261,6 +261,26 @@ if grep -qs "T480" /sys/class/dmi/id/product_version && grep -qs '0x10de' /sys/b
     else
         info "NVIDIA runtime power management rule already in place, skipping"
     fi
+
+    info "Installing TLP..."
+    sudo pacman -S --needed --noconfirm tlp
+    TLP_SRC="$DOTFILES_DIR/system/tlp.d/10-t480.conf"
+    TLP_DST="/etc/tlp.d/10-t480.conf"
+    sudo mkdir -p /etc/tlp.d
+    if ! cmp -s "$TLP_SRC" "$TLP_DST"; then
+        sudo cp "$TLP_SRC" "$TLP_DST"
+        success "TLP drop-in installed (applies at boot)"
+    else
+        info "TLP drop-in already in place, skipping"
+    fi
+    if systemctl is-enabled --quiet tlp.service; then
+        success "tlp.service already enabled"
+    else
+        sudo systemctl enable tlp.service
+        success "tlp.service enabled"
+    fi
+    sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
+    success "systemd-rfkill masked (TLP handles rfkill)"
 else
     info "Not a T480 with an NVIDIA GPU, skipping machine-specific fixes"
 fi
