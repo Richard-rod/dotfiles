@@ -346,6 +346,10 @@ eval "$(zoxide init bash)"
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 
+if [ -f /usr/bin/fastfetch ]; then
+	fastfetch
+fi
+
 exec startx
 
 fi
